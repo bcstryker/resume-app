@@ -1,0 +1,78 @@
+<div class="rounded container bg-white mt-4">
+    <h2 class="p-2 fw-bold text-center">Resume App</h2>
+</div>
+
+<div class="container rounded bg-white mt-3">
+    <div class="row p-2">
+        <div class="col-3 border">
+            <h4 class='fw-bold p-2'>Users</h4>
+            <div class="list-group p-2">
+                <a [routerLink]="['/portal', user._id]" 
+                routerLinkActive="active"
+                *ngFor="let user of users" 
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                aria-current="true">
+                {{ user.firstName }} {{ user.lastName }}
+                <span style="color:red" (click)="deleteUser(user)" class="badge bg-white rounded-pill">X</span>
+                </a>
+            </div>
+            <div class="row p-2">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary" (click)=addNewUser() routerLink="/new-user">
+                        New User
+                    </button>
+                </div>
+            </div>    
+        </div>
+        <div class="col-3 border">
+            <h4 class='fw-bold p-2'>Resumes</h4>
+            <div class="list-group p-2">        
+                <a [routerLink]="['/portal', resume._userId, 'resumes', resume._id]" 
+                routerLinkActive="active-link"
+                *ngFor="let resume of resumes" 
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                aria-current="true">
+                    {{ resume.title }}
+                    <span (click)="deleteResume(resume)" class="badge bg-danger rounded-pill">x</span>
+                </a>
+            </div>
+            <div class="row p-2">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary"
+                        (click)=addNewResume()>
+                        New Resume
+                    </button>
+                </div>
+            </div>     
+        </div>
+        <div class="col-6 border">
+            <h4 class='fw-bold p-2'>Work Experience</h4>
+            <div class="list-group p-2">
+                <li style="cursor: pointer" 
+                    *ngFor="let experience of experiences"
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ experience.monthStart }}/{{ experience.yearStart}} - {{ experience.monthEnd}}/{{ experience.yearEnd}} 
+                        {{ experience.title  }} at {{ experience.employer }}<br/>
+                        {{ experience.description }}
+                    <span (click)="deleteExperience(experience)" class="badge bg-danger rounded-pill">x</span>
+                </li>
+                <div class="row p-2">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-outline-primary"
+                            (click)=addNewExperience()>
+                            New Experience
+                        </button>
+                    </div>
+                </div>
+                <!-- <a [routerLink]="['/portal', user._id, 'resumes']" 
+                routerLinkActive="active"
+                *ngFor="let experience of experiences" 
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                aria-current="true">
+                {{ experience.title }}
+                <span class="badge bg-danger rounded-pill">x</span>
+                </a> -->
+            </div>    
+        </div>
+    </div>
+</div>

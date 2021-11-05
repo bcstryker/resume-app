@@ -1,0 +1,8 @@
+Change date stuff to date objects, sort experience by start date
+Add modify resume and user and experience buttons
+Reverse experience and resumes, create experience first then build resumes from collection of experience
+
++ road map
+
+Not as important
+    - Highlight resume on selection

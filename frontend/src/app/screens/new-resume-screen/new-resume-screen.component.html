@@ -1,0 +1,40 @@
+<div class="container text-center mt-4">
+    <div class="row">
+        <div class="col4">
+            <form (keydown.enter)="$event.preventDefault()"
+                (keyup.enter)="addNewResume({
+                    'title': title.value,
+                    'skills': skills.value,
+                    'education': education.value,
+                    'aboutMe': aboutMe.value
+                })"
+            >
+                <div class="form-group">
+                  <h3 for="resume">New Resume</h3>
+                  <input #title type="text" class="form-control" id="title" placeholder="Title">
+                  <input #skills type="text" class="form-control" id="skills" placeholder="List Your Skills">
+                  <input #education type="text" class="form-control" id="education" placeholder="Education">
+                  <input #aboutMe type="text" class="form-control" id="aboutMe" placeholder="About Me">
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col8">
+                <div>
+                    <button type="button" class="btn btn-secondary mx-1 mt-2" routerLink="../">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary mx-1 mt-2"
+                        (click)="addNewResume({
+                            'title': title.value,
+                            'skills': skills.value,
+                            'education': education.value,
+                            'aboutMe': aboutMe.value
+                        })">
+                        Add Resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

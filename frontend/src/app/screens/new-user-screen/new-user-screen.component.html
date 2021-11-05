@@ -1,0 +1,40 @@
+<div class="container text-center mt-4">
+    <div class="row">
+        <div class="col4">
+            <form (keydown.enter)="$event.preventDefault()"
+                (keyup.enter)="addNewUser({
+                    'firstName': firstName.value,
+                    'lastName': lastName.value,
+                    'email': email.value,
+                    'address': address.value
+                })"
+            >
+                <div class="form-group">
+                  <h3 for="user">New User</h3>
+                  <input #firstName type="text" class="form-control" id="firstName" placeholder="First Name">
+                  <input #lastName type="text" class="form-control" id="lastName" placeholder="Last Name">
+                  <input #email type="text" class="form-control" id="email" placeholder="Email">
+                  <input #address type="text" class="form-control" id="address" placeholder="Address">
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col8">
+                <div>
+                    <button type="button" class="btn btn-secondary mx-1 mt-2" routerLink="../">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary mx-1 mt-2"
+                        (click)="addNewUser({
+                            'firstName': firstName.value,
+                            'lastName': lastName.value,
+                            'email': email.value,
+                            'address': address.value
+                        })">
+                        Add User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

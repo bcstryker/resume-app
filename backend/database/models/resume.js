@@ -5,6 +5,9 @@ const experience = require('./experience')
 const resumeSchema = new mongoose.Schema({
     _userId: {
         type: mongoose.Types.ObjectId
+    }, title: {
+        type: String,
+        trim: true
     }, skills: {
         type: Array
     }, education: {

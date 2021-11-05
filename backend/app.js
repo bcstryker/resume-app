@@ -92,6 +92,7 @@ app.post('/portal/:userId/resumes', async (req, res) => {
 //   console.log(thisUser.first_name);
   const resumeData = {
     '_userId': req.params.userId,
+    'title': req.body.title,
     'skills': req.body.skills,
     'education': req.body.education,
     'about_me': req.body.about_me
@@ -151,15 +152,14 @@ app.post('/portal/:userId/resumes/:resumeId/experience', async (req, res) => {
   let expObject = {
     '_userId': req.params.userId,
     '_resumeId': req.params.resumeId,
-    'experience': {
-      'monthStart': req.body.experience.monthStart,
-      'yearStart': req.body.experience.yearStart,
-      'monthEnd': req.body.experience.monthEnd,
-      'yearEnd': req.body.experience.yearEnd,
-      'title': req.body.experience.title,
-      'description': req.body.experience.description
-    }
-  };
+    'employer': req.body.employer,
+    'monthStart': req.body.monthStart,
+    'yearStart': req.body.yearStart,
+    'monthEnd': req.body.monthEnd,
+    'yearEnd': req.body.yearEnd,
+    'title': req.body.title,
+    'description': req.body.description
+  }; 
   console.log(expObject)
   const responseExpObject = await experience(expObject).save()
     .catch(err => console.log(err));
@@ -171,8 +171,7 @@ app.get('/portal/:userId/resumes/:resumeId/experience', async (req, res) => {
   const experienceResponse = await experience.find({
     _userId: req.params.userId,
     _resumeId: req.params.resumeId
-  })
-    .catch(err => console.log(error));
+  }).catch(err => console.log(error));
   res.status(200).send(experienceResponse);
 });
 
@@ -182,8 +181,7 @@ app.get('/portal/:userId/resumes/:resumeId/experience/:experienceId', async (req
       _userId: req.params.userId,
       _resumeId: req.params.resumeId,
       _id: req.params.experienceId
-    })
-      .catch(err => console.log(error));
+    }).catch(err => console.log(error));
     res.status(200).send(experienceResponse);
   });
 
@@ -191,7 +189,7 @@ app.get('/portal/:userId/resumes/:resumeId/experience/:experienceId', async (req
 app.patch('/portal/:userId/resumes/:resumeId/experience/:experienceId', async (req, res) => {
     const updatedExperience = await experience.findOneAndUpdate({
       _userId: req.params.userId,
-      _resume_id: req.params.resumeId,
+      _resumeId: req.params.resumeId,
       _id: req.params.experienceId}, 
       {$set: req.body}, 
       {'new': true}

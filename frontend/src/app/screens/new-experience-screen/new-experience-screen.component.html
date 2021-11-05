@@ -1,0 +1,49 @@
+<div class="container text-center mt-4">
+    <div class="row">
+        <div class="col4">
+            <!-- <form (keydown.enter)="$event.preventDefault()"
+                (keyup.enter)="addNewExperience({
+                    'employer': employer.value,
+                    'monthStart': monthStart.value,
+                    'yearStart': yearStart.value,
+                    'monthEnd': monthEnd.value
+                    'yearEnd': yearEnd.value
+                    'title': title.value
+                    'description': description.value
+                })" -->
+            <form>
+                <div class="form-group">
+                  <h3 for="experience">New Work Experience</h3>
+                  <input #employer type="text" class="form-control" id="employer" placeholder="Employer">
+                  <input #monthStart type="text" class="form-control" id="monthStart" placeholder="Start Month">
+                  <input #yearStart type="text" class="form-control" id="yearStart" placeholder="Start Year">
+                  <input #monthEnd type="text" class="form-control" id="monthEnd" placeholder="End Month">
+                  <input #yearEnd type="text" class="form-control" id="yearEnd" placeholder="End Year">
+                  <input #title type="text" class="form-control" id="title" placeholder="Job Title">
+                  <input #description type="text" class="form-control" id="description" placeholder="Job Description">
+                </div> 
+            </form>
+        </div>
+        <div class="row">
+            <div class="col8">
+                <div>
+                    <button type="button" class="btn btn-secondary mx-1 mt-2" routerLink="../">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary mx-1 mt-2"
+                        (click)="addNewExperience({
+                            'employer': employer.value,
+                            'monthStart': monthStart.value,
+                            'yearStart': yearStart.value,
+                            'monthEnd': monthEnd.value,
+                            'yearEnd': yearEnd.value,
+                            'title': title.value,
+                            'description': description.value
+                        })">
+                        Add Experience
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
