@@ -17,11 +17,18 @@ $input-shadow: none;
 html, body {
     background: linear-gradient(to top right, $turquoise, $blue);
     font-family: "Nunito";
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
+    min-width: 850px;
 }
 
 .white-text {
     color: white;
+}
+
+.main {
+    width: 95%;
 }
 
 .title {

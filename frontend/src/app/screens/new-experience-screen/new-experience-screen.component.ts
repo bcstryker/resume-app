@@ -27,7 +27,7 @@ export class NewExperienceScreenComponent implements OnInit {
   }
   
   addNewExperience(data: object) {
-    this.experienceService.createExperience(this.userId, this.resumeId, data).subscribe(
+    this.experienceService.createExperience(this.userId, data).subscribe(
       (newExperience: ExperienceModel) => {
         this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       }

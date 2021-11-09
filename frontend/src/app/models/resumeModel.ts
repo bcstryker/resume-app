@@ -1,10 +1,10 @@
 class ResumeModel {
     _id!: string;
     _userId!: string;
+    _experienceArray!: [string];
     title!: string;
-    skills!: Array<string>;
+    skills!: [string];
     education!: string;
-    experience!: Array<Map<string, string>>
 }
 
 export default ResumeModel;

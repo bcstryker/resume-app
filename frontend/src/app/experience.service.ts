@@ -9,18 +9,18 @@ import ExperienceModel from './models/experienceModel';
 })
 export class ExperienceService {
 
-  constructor(private apiConfigService: ApiConfigService) { }
+  constructor( private apiConfigService: ApiConfigService ) { }
 
-  getExperiences(userId: string, resumeId: string): Observable<ExperienceModel[]> {
-    return this.apiConfigService.getExperiences(`portal/${userId}/resumes/${resumeId}/experience`);
+  getExperiences( userId: string ): Observable<ExperienceModel[]> {
+    return this.apiConfigService.getExperiences( `portal/${userId}/experience` );
   }
 
-  createExperience(userId: string, resumeId: string, data: object): Observable<ExperienceModel> {
-    return this.apiConfigService.createExperience(`portal/${userId}/resumes/${resumeId}/experience`, data)  
+  createExperience(userId: string, data: object): Observable<ExperienceModel> {
+    return this.apiConfigService.createExperience( `portal/${userId}/experience`, data )  
   }
 
-  deleteExperience(userId: string, resumeId: string, experienceId: string): Observable<ExperienceModel> {
-    return this.apiConfigService.deleteExperience(`portal/${userId}/resumes/${resumeId}/experience/${experienceId}`);
+  deleteExperience( userId: string, experienceId: string ): Observable<ExperienceModel> {
+    return this.apiConfigService.deleteExperience( `portal/${userId}/experience/${experienceId}` );
   }
 
 }

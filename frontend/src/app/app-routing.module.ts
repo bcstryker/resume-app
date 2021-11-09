@@ -15,7 +15,7 @@ const routes: Routes = [
 
   { path: 'portal/:userId/new-resume', component: NewResumeScreenComponent },
 
-  { path: 'portal/:userId/resumes/:resumeId/new-experience', component: NewExperienceScreenComponent }
+  { path: 'portal/:userId/new-experience', component: NewExperienceScreenComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

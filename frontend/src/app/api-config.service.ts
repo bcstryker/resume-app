@@ -22,20 +22,8 @@ export class ApiConfigService {
   deleteUser(url: string) {
     return this.httpClient.delete<UserModel>(`${this.API_BASE_URL}/${url}`);
   }
-// resumes ------------------------------------------------------------------------
-  getResumes(url: string) {
-    return this.httpClient.get<ResumeModel[]>(`${this.API_BASE_URL}/${url}`);
-  }
-  createResume(url: string, data: Object) {
-    return this.httpClient.post<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
-  }
-  updateResume(url: string, data: Object) {
-    return this.httpClient.patch<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
-  }
-  deleteResume(url: string) {
-    return this.httpClient.delete<ResumeModel>(`${this.API_BASE_URL}/${url}`);
-  }
-// experience ----------------------------------------------------------------------
+  
+  // experience ----------------------------------------------------------------------
   getExperiences(url: string) {
     return this.httpClient.get<ExperienceModel[]>(`${this.API_BASE_URL}/${url}`);
   }
@@ -48,4 +36,19 @@ export class ApiConfigService {
   deleteExperience(url: string) {
     return this.httpClient.delete<ExperienceModel>(`${this.API_BASE_URL}/${url}`);
   }
+
+  // resumes ------------------------------------------------------------------------
+  getResumes(url: string) {
+    return this.httpClient.get<ResumeModel[]>(`${this.API_BASE_URL}/${url}`);
+  }
+  createResume(url: string, data: Object) {
+    return this.httpClient.post<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
+  }
+  updateResume(url: string, data: Object) {
+    return this.httpClient.patch<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
+  }
+  deleteResume(url: string) {
+    return this.httpClient.delete<ResumeModel>(`${this.API_BASE_URL}/${url}`);
+  }
+
 }

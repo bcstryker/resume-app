@@ -16,9 +16,13 @@ export class UserScreenComponent implements OnInit {
 
   users: UserModel[] = [];
   resumes: ResumeModel[] = [];
+  currentResume: ResumeModel = {} as ResumeModel;
   experiences: ExperienceModel[] = []; 
+  resumeExperience: ExperienceModel[] = [];
   userId: string = '';
   resumeId: string = '';
+  resumeTitle: string = '';
+  experienceId: string = '';
 
   constructor(
     private userService: UserService,
@@ -29,65 +33,86 @@ export class UserScreenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(allUsers => {this.users = allUsers;});
+    this.userService.getAllUsers().subscribe( allUsers => { this.users = allUsers } );
     this.activatedRoute.params.subscribe(
-      (params: Params) => {
+      ( params: Params ) => {
         this.userId = params.userId;
+        this.experienceId = params.experienceId;
         this.resumeId = params.resumeId;
-        if (this.userId) {
-          this.resumeService.getAllResumes(this.userId).subscribe(
-            (allResumes: ResumeModel[]) => { this.resumes = allResumes }
+        if ( this.userId ) {
+          this.experienceService.getExperiences( this.userId ).subscribe(
+            ( allExperiences: ExperienceModel[]) => { 
+              this.experiences = allExperiences.sort(function (a, b) {
+                var dateA = new Date(a.startDate).getTime();
+                var dateB = new Date(b.startDate).getTime();
+                return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+              });
+            }
           );
-        }
-        if (this.userId && this.resumeId) {
-          this.experienceService.getExperiences(this.userId, this.resumeId).subscribe(
-            (allExperiences: ExperienceModel[]) => { this.experiences = allExperiences }
+          this.resumeService.getAllResumes( this.userId ).subscribe(
+            ( allResumes: ResumeModel[] ) => { this.resumes = allResumes }
           );
+          let dropdown = document.querySelector('resumeTitle');
+          if (dropdown) dropdown.addEventListener('change', function(event) {
+              console.log(event?.target);
+          });
+          // console.log(document.getElementById("resumeTitle")?.value);
         }
       }
     );  
   }
 
+
+
   addNewUser() {
-    this.router.navigate(['./new-user'])
+    this.router.navigate( ['./new-user'] )
   }
 
-  deleteUser(clickedUser: UserModel) {
-    this.userService.deleteUser(clickedUser._id)
+  deleteUser( clickedUser: UserModel ) {
+    this.userService.deleteUser( clickedUser._id )
       .subscribe(() => {
-        this.users = this.users.filter(u => u._id != clickedUser._id);
+        this.users = this.users.filter( u => u._id != clickedUser._id );
       });
   }
 
   addNewResume() {
-    if (this.userId) {
-      this.router.navigate(['./new-resume'], { relativeTo: this.activatedRoute})
+    if ( this.userId ) {
+      this.router.navigate( [ `/portal/${this.userId}/new-resume` ], { relativeTo: this.activatedRoute } )
     } else {
-      alert("Please select a User.");
+      alert( "Please select a User." );
       return;
     }
   }
 
-  deleteResume(resume: ResumeModel) {
-    this.resumeService.deleteResume(this.userId, resume._id)
-      .subscribe((deletedResume: ResumeModel) => {
-        this.resumes = this.resumes.filter(r => r._id != deletedResume._id);
+  deleteResume( clickedResume: ResumeModel ) {
+    this.resumeService.deleteResume( this.userId, clickedResume._id )
+      .subscribe( ( deletedResume: ResumeModel ) => {
+        this.resumes = this.resumes.filter( r => r._id != deletedResume._id );
       });
   }
 
   addNewExperience(){
-    if (this.userId && this.resumeId) {
-      this.router.navigate(['./new-experience'], { relativeTo: this.activatedRoute});
+    if ( this.userId ) {
+      this.router.navigate( [ `/portal/${this.userId}/new-experience` ]);
     } else {
-      alert("Please select a resume.");
+      alert( "Please select a User." );
       return;
     }
   }
 
-  deleteExperience(experience: ExperienceModel) {
-    this.experienceService.deleteExperience(this.userId, this.resumeId, experience._id)
-      .subscribe((deletedExperience: ExperienceModel) => {
-        this.experiences = this.experiences.filter(e => e._id != deletedExperience._id);
+  addExperienceToResume( experienceId: string ){
+    if ( this.resumeId ) {
+      this.resumeService.addExperienceToResume( this.userId, this.resumeId, experienceId );
+      console.log( experienceId );
+    } else { 
+      alert( "Please select a resume." );
+    }
+  }
+
+  deleteExperience( experience: ExperienceModel ) {
+    this.experienceService.deleteExperience( this.userId, experience._id )
+      .subscribe( ( deletedExperience: ExperienceModel ) => {
+        this.experiences = this.experiences.filter( e => e._id != deletedExperience._id );
       });
   }
 }
