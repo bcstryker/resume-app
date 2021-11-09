@@ -34,7 +34,7 @@
                         {{ experience.startDate | date: 'MM/yyyy' }} - {{ experience.endDate | date: 'MM/yyyy'}}<br/> 
                         {{ experience.description }}
                         <span (click)="deleteExperience(experience)" class="badge bg-danger rounded-pill">x</span>
-                        <span (click)="addExperienceToResume(experience._id)" class="badge bg-success rounded-pill">+</span>
+                        <span (click)="addExperienceToResume(experience)" class="badge bg-success rounded-pill">+</span>
                     </li>
                 <div class="row p-2">
                     <div class="col-12">
@@ -51,20 +51,22 @@
         <div class="col-12 border">
             <h4 class='fw-bold p-2'>Resumes</h4>
             
-            <select class="p-2" id=resumeTitle>
-                <option *ngFor="let resume of resumes">
-                    {{ resume.title }}
+            <select class="p-2" id="resumeTitle" value="resume._experienceArray" #t 
+            (change)="filterExperience(t.value)">
+                <option *ngFor="let resume of resumes" [value] = resume.title>
+                    <div >{{ resume.title }}</div>
                 </option>
             </select>
             
             <div class="list-group p-2">        
-                <tr [routerLink]="['/portal', resume._userId, 'resumes', resume._id]" 
-                routerLinkActive="active-link"
-                *ngFor="let resume of resumes" 
+                <tr 
+                *ngFor="let experience of resumeExperience" 
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 aria-current="true">
-                    {{ resume.title }}
-                    <span (click)="deleteResume(resume)" class="badge bg-danger rounded-pill">x</span>
+                {{ experience.title  }} at {{ experience.employer }}<br/>
+                {{ experience.startDate | date: 'MM/yyyy' }} - {{ experience.endDate | date: 'MM/yyyy'}}<br/> 
+                {{ experience.description }}
+                <!-- <span (click)="removeExperienceFromResume(experience)" class="badge bg-danger rounded-pill">-</span> -->
                 </tr>
             </div>
         </div>

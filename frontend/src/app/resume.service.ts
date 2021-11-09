@@ -31,5 +31,10 @@ export class ResumeService {
   deleteResume( userId: string, resumeId: string ): Observable<ResumeModel> {
     return this.apiConfigService.deleteResume( `portal/${userId}/resumes/${resumeId}` );
   }
+
+  removeExperienceFromResume( userId: string, resumeId: string, experienceId: string ): Observable<ResumeModel> {
+    const data: Object = { "experienceId": experienceId}
+    return this.apiConfigService.removeExperienceFromResume( `portal/${userId}/resumes/${resumeId}/removeExperience`, data );
+  }
   
 }
