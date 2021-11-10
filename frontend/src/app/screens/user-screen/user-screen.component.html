@@ -59,15 +59,14 @@
             </select>
             
             <div class="list-group p-2">        
-                <tr 
-                *ngFor="let experience of resumeExperience" 
+                <li style="cursor: pointer" *ngFor="let experience of resumeExperience" 
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 aria-current="true">
                 {{ experience.title  }} at {{ experience.employer }}<br/>
                 {{ experience.startDate | date: 'MM/yyyy' }} - {{ experience.endDate | date: 'MM/yyyy'}}<br/> 
                 {{ experience.description }}
-                <!-- <span (click)="removeExperienceFromResume(experience)" class="badge bg-danger rounded-pill">-</span> -->
-                </tr>
+                <span (click)="removeExperienceFromResume(experience)" class="badge bg-danger rounded-pill">-</span>
+            </li>
             </div>
         </div>
     </div>

@@ -45,13 +45,10 @@ export class ApiConfigService {
     return this.httpClient.post<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
   }
   updateResume(url: string, data: Object) {
+    // console.log(data);
     return this.httpClient.patch<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
   }
   deleteResume(url: string) {
     return this.httpClient.delete<ResumeModel>(`${this.API_BASE_URL}/${url}`);
   }
-  removeExperienceFromResume(url: string, data: Object) {
-    return this.httpClient.patch<ResumeModel>(`${this.API_BASE_URL}/${url}`, data);
-  }
-
 }

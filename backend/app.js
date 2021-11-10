@@ -199,15 +199,16 @@ app.patch( '/portal/:userId/resumes/:resumeId/addExperience', async ( req, res )
     { $push: { _experienceArray: req.body.experienceId } }, 
     { 'new': true }
   ).catch( err => console.log( err ));
+  console.log(req.body);
   res.status( 201 ).send( updatedResume );
 });
 
-// Patch remove an experience to a resume
+// Patch remove an experience from a resume
 app.patch( '/portal/:userId/resumes/:resumeId/removeExperience', async ( req, res ) => {
   const updatedResume = await resume.findOneAndUpdate({
     _userId: req.params.userId, 
     _id: req.params.resumeId}, 
-    { $pull: { _experienceArray: req.body.experienceId } }, 
+    { $pull: { _experienceArray: {$in: [req.body.experienceId]} } }, 
     { 'new': true }
   ).catch( err => console.log( err ) );
   res.status( 201 ).send( updatedResume );

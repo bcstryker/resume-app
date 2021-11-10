@@ -27,14 +27,14 @@ export class ResumeService {
     return this.apiConfigService.updateResume( `portal/${userId}/resumes/${resumeId}/addExperience`, data )  
   }
 
+  removeExperienceFromResume( userId: string, resumeId: string, experienceId: string ): Observable<ResumeModel> {
+    const data: Object = { "experienceId": experienceId };
+    return this.apiConfigService.updateResume( `portal/${userId}/resumes/${resumeId}/removeExperience`, data );
+  }
+
   //delete one task from a specific task list
   deleteResume( userId: string, resumeId: string ): Observable<ResumeModel> {
     return this.apiConfigService.deleteResume( `portal/${userId}/resumes/${resumeId}` );
-  }
-
-  removeExperienceFromResume( userId: string, resumeId: string, experienceId: string ): Observable<ResumeModel> {
-    const data: Object = { "experienceId": experienceId}
-    return this.apiConfigService.removeExperienceFromResume( `portal/${userId}/resumes/${resumeId}/removeExperience`, data );
   }
   
 }
