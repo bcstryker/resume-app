@@ -71,14 +71,12 @@ export class UserScreenComponent implements OnInit {
   }
 
   filterExperience( resumeId: String ) {
-
     this.resumeExperience = [];
     for ( let resume of this.resumes ) {
       if ( resumeId === resume._id ) {
         this.currentResume = resume;
       }
     }
-    
     for ( let exp of this.experiences ) {
       if ( this.currentResume._experienceArray.includes( exp._id ) ) {
         this.resumeExperience = [ ...this.resumeExperience, exp ]
@@ -123,6 +121,10 @@ export class UserScreenComponent implements OnInit {
       .subscribe( ( deletedExperience: ExperienceModel ) => {
         this.experiences = this.experiences.filter( e => e._id != deletedExperience._id );
       });
+  }
+
+  editExperience() {
+    this.router.navigate( [`/portal/${this.userId}/edit-experience`] )
   }
 
   addExperienceToResume( experience: ExperienceModel ){

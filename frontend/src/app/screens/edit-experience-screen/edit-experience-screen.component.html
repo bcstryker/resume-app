@@ -1,0 +1,15 @@
+<div class="container text-center mt-4">
+    <div class="col-9 border">
+        <h4 class='fw-bold p-2'>Edit Work Experience</h4>
+        <div class="list-group p-2">
+            <div *ngFor="let experience of experiences">
+                <input #title type="text" class="form-control" id="title" value={{experience.title}}>
+                <input #employer type="text" class="form-control" id="employer" value={{experience.employer}}>
+                <input #startDate type="date" class="form-control" id="startDate" value={{experience.startDate}}>
+                <input #endDate type="date" class="form-control" id="endDate" value={{experience.endDate}}>
+                <textarea #description type="text" class="form-control" rows=2 cols=80>{{experience.description}}</textarea>
+                <br/>
+            </div>
+        </div>  
+    </div>
+</div>
