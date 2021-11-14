@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeService } from 'src/app/resume.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import UserModel from 'src/app/models/userModel';
 import ResumeModel from 'src/app/models/resumeModel';
 import ExperienceModel from 'src/app/models/experienceModel';
@@ -29,7 +30,8 @@ export class UserScreenComponent implements OnInit {
     private resumeService: ResumeService,
     private experienceService: ExperienceService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -54,29 +56,34 @@ export class UserScreenComponent implements OnInit {
           );
         }
       }
-    );  
+    );
+  }
+
+  updateResumeTitle() {
+    this.resumeTitle = (document.getElementById("resumeTitle") as HTMLSelectElement).value;
+    // console.log(this.resumeTitle);
+    this.filterExperience(this.resumeTitle);
+    this.cdr.detectChanges();
   }
 
   addNewUser() {
     this.router.navigate( ['./new-user'] )
   }
 
-  filterExperience( resumeTitle: String ) {
+  filterExperience( resumeId: String ) {
 
-    let currentResume: ResumeModel = {} as ResumeModel;
     this.resumeExperience = [];
     for ( let resume of this.resumes ) {
-      if ( resumeTitle === resume.title ) {
-        currentResume = resume;
+      if ( resumeId === resume._id ) {
+        this.currentResume = resume;
       }
     }
     
     for ( let exp of this.experiences ) {
-      if ( currentResume._experienceArray.includes( exp._id ) ) {
+      if ( this.currentResume._experienceArray.includes( exp._id ) ) {
         this.resumeExperience = [ ...this.resumeExperience, exp ]
       }
     }
-    this.router.navigate( [ `/portal/${this.userId}/resumes/${currentResume._id}` ], { relativeTo: this.activatedRoute } )
   }
 
   deleteUser( clickedUser: UserModel ) {
@@ -119,11 +126,15 @@ export class UserScreenComponent implements OnInit {
   }
 
   addExperienceToResume( experience: ExperienceModel ){
-    if ( this.resumeId ) {
-      this.resumeService.addExperienceToResume( this.userId, this.resumeId, experience._id )
-        .subscribe(() => {
-          this.resumeExperience = [];
-
+    if ( this.currentResume._id ) {
+      this.resumeService.addExperienceToResume( this.userId, this.currentResume._id, experience._id )
+        .subscribe( ( updatedResume ) => {
+          for ( let resume of this.resumes ) {
+            if ( resume._id === updatedResume._id) {
+              resume._experienceArray = updatedResume._experienceArray;
+              this.filterExperience(resume._id);
+            }
+          }
         });
     } else { 
       alert( "Please select a resume." );
@@ -131,9 +142,16 @@ export class UserScreenComponent implements OnInit {
   }
 
   removeExperienceFromResume ( experience: ExperienceModel ) {
-    if ( this.resumeId ) {
-      this.resumeService.removeExperienceFromResume( this.userId, this.resumeId, experience._id)
-        .subscribe();
+    if ( this.currentResume._id ) {
+      this.resumeService.removeExperienceFromResume( this.userId, this.currentResume._id, experience._id)
+        .subscribe( ( updatedResume ) => {
+          for ( let resume of this.resumes ) {
+            if ( resume._id === updatedResume._id) {
+              resume._experienceArray = updatedResume._experienceArray;
+              this.filterExperience(resume._id);
+            }
+          }
+        });
     } else {
       alert( "Please select a resume." );
     }

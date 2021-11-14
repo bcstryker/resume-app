@@ -51,22 +51,31 @@
         <div class="col-12 border">
             <h4 class='fw-bold p-2'>Resumes</h4>
             
-            <select class="p-2" id="resumeTitle" value="resume._experienceArray" #t 
-            (change)="filterExperience(t.value)">
-                <option *ngFor="let resume of resumes" [value] = resume.title>
+            <select #t class="p-2" id="resumeTitle" value="resume._experienceArray" 
+            (change)="updateResumeTitle()">
+                <option class="" disabled selected value="undefined">Select a Resume</option>
+                <option *ngFor="let resume of resumes" [value]=resume._id>
                     <div >{{ resume.title }}</div>
                 </option>
             </select>
             
             <div class="list-group p-2">        
-                <li style="cursor: pointer" *ngFor="let experience of resumeExperience" 
+                <a style="cursor: pointer" *ngFor="let experience of resumeExperience" 
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                 aria-current="true">
                 {{ experience.title  }} at {{ experience.employer }}<br/>
                 {{ experience.startDate | date: 'MM/yyyy' }} - {{ experience.endDate | date: 'MM/yyyy'}}<br/> 
                 {{ experience.description }}
                 <span (click)="removeExperienceFromResume(experience)" class="badge bg-danger rounded-pill">-</span>
-            </li>
+            </a>
+            <div class="row p-2">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary"
+                        (click)=addNewResume()>
+                        New Resume
+                    </button>
+                </div>
+            </div>
             </div>
         </div>
     </div>
