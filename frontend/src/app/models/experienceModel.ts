@@ -6,6 +6,8 @@ class ExperienceModel {
     endDate!: Date;
     title!: string;
     description!: string;
+    resumeDescriptions!: any;
+    currentDescription!: string;
 }
 
 export default ExperienceModel;

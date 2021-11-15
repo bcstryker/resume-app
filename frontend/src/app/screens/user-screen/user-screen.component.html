@@ -71,7 +71,7 @@
                 aria-current="true">
                 {{ experience.title  }} at {{ experience.employer }}<br/>
                 {{ experience.startDate | date: 'MM/yyyy' }} - {{ experience.endDate | date: 'MM/yyyy'}}<br/> 
-                {{ experience.description }}
+                {{ experience.currentDescription }}
                 <span (click)="removeExperienceFromResume(experience)" class="badge bg-danger rounded-pill">-</span>
             </a>
             <div class="row p-2">

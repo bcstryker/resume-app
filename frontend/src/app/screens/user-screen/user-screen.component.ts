@@ -70,7 +70,7 @@ export class UserScreenComponent implements OnInit {
     this.router.navigate( ['./new-user'] )
   }
 
-  filterExperience( resumeId: String ) {
+  filterExperience( resumeId: string ) {
     this.resumeExperience = [];
     for ( let resume of this.resumes ) {
       if ( resumeId === resume._id ) {
@@ -80,6 +80,17 @@ export class UserScreenComponent implements OnInit {
     for ( let exp of this.experiences ) {
       if ( this.currentResume._experienceArray.includes( exp._id ) ) {
         this.resumeExperience = [ ...this.resumeExperience, exp ]
+      }
+      for ( let exp of this.resumeExperience ) {
+        if ( exp.resumeDescriptions ) {
+          if ( resumeId in exp.resumeDescriptions ) {
+            exp["currentDescription"] = exp.resumeDescriptions[resumeId];
+          } else {
+            exp["currentDescription"] = exp["description"];
+          }
+        } else {
+          exp["currentDescription"] = exp["description"];
+        }
       }
     }
   }
