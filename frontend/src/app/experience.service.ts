@@ -11,8 +11,8 @@ export class ExperienceService {
 
   constructor( private apiConfigService: ApiConfigService ) { }
 
-  getExperiences( userId: string ): Observable<ExperienceModel[]> {
-    return this.apiConfigService.getExperiences( `portal/${userId}/experience` );
+  getExperience( userId: string ): Observable<ExperienceModel[]> {
+    return this.apiConfigService.getExperience( `portal/${userId}/experience` );
   }
 
   createExperience(userId: string, data: object): Observable<ExperienceModel> {
@@ -21,6 +21,10 @@ export class ExperienceService {
 
   deleteExperience( userId: string, experienceId: string ): Observable<ExperienceModel> {
     return this.apiConfigService.deleteExperience( `portal/${userId}/experience/${experienceId}` );
+  }
+
+  editExperience( userId: string, experienceId: string, data: object ): Observable<ExperienceModel> {
+    return this.apiConfigService.updateExperience( `portal/${userId}/experience/${experienceId}`, data)
   }
 
 }

@@ -42,7 +42,7 @@ export class UserScreenComponent implements OnInit {
         this.experienceId = params.experienceId;
         this.resumeId = params.resumeId;
         if ( this.userId ) {
-          this.experienceService.getExperiences( this.userId ).subscribe(
+          this.experienceService.getExperience( this.userId ).subscribe(
             ( allExperiences: ExperienceModel[]) => { 
               this.experiences = allExperiences.sort(function (a, b) {
                 var dateA = new Date(a.startDate).getTime();

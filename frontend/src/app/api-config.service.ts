@@ -24,7 +24,7 @@ export class ApiConfigService {
   }
   
   // experience ----------------------------------------------------------------------
-  getExperiences(url: string) {
+  getExperience(url: string) {
     return this.httpClient.get<ExperienceModel[]>(`${this.API_BASE_URL}/${url}`);
   }
   createExperience(url: string, data: Object) {

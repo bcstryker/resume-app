@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ExperienceService } from 'src/app/experience.service';
 import ExperienceModel from 'src/app/models/experienceModel';
 import ResumeModel from 'src/app/models/resumeModel';
@@ -17,6 +17,7 @@ export class EditExperienceScreenComponent implements OnInit {
   experienceId: string = '';
   resumeId: string = '';
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private experienceService: ExperienceService,
     private resumeService: ResumeService,
@@ -29,7 +30,7 @@ export class EditExperienceScreenComponent implements OnInit {
         this.experienceId = params.experienceId;
         this.resumeId = params.resumeId;
         if ( this.userId ) {
-          this.experienceService.getExperiences( this.userId ).subscribe(
+          this.experienceService.getExperience( this.userId ).subscribe(
             ( allExperiences: ExperienceModel[]) => { 
               this.experiences = allExperiences.sort(function (a, b) {
                 var dateA = new Date(a.startDate).getTime();
@@ -41,5 +42,10 @@ export class EditExperienceScreenComponent implements OnInit {
         }
       }
     );
+  }
+
+  editExperience(experienceId: string, data: object) {
+    this.experienceService.editExperience(this.userId, experienceId, data)
+      .subscribe(() => {this.router.navigate(['../'], {relativeTo: this.activatedRoute})});
   }
 }

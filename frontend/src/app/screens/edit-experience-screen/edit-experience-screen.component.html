@@ -5,10 +5,39 @@
             <div *ngFor="let experience of experiences">
                 <input #title type="text" class="form-control" id="title" value={{experience.title}}>
                 <input #employer type="text" class="form-control" id="employer" value={{experience.employer}}>
-                <input #startDate type="date" class="form-control" id="startDate" value={{experience.startDate}}>
-                <input #endDate type="date" class="form-control" id="endDate" value={{experience.endDate}}>
+                <input #startDate type="date" class="form-control" id="startDate" value={{experience.startDate.toString().substring(0,10)}}>
+                <input #endDate type="date" class="form-control" id="endDate" value={{experience.endDate.toString().substring(0,10)}}>
                 <textarea #description type="text" class="form-control" rows=2 cols=80>{{experience.description}}</textarea>
                 <br/>
+                <button type="submit" class="btn btn-primary mx-1 mt-2 mb-4"  
+                    (click)="editExperience(experience._id,
+                    {
+                        'employer': employer.value,
+                        'startDate': startDate.value,
+                        'endDate': endDate.value,
+                        'title': title.value,
+                        'description': description.value
+                    })">
+                    Submit Changes
+                </button>
+            </div>
+            <div class="row">
+                <div class="col8">
+                    <div>
+                        <button type="button" class="btn btn-danger mx-1 mt-2" routerLink="../">
+                            Cancel
+                        </button>
+                        <!-- <button type="submit" class="btn btn-primary mx-1 mt-2"  (click)="test({
+                            'employer': employer.value,
+                            'startDate': startDate.value,
+                            'endDate': endDate.value,
+                            'title': title.value,
+                            'description': description.value
+                        })">
+                            Submit Changes
+                        </button> -->
+                    </div>
+                </div>
             </div>
         </div>  
     </div>
