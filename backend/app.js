@@ -128,7 +128,7 @@ app.patch( '/portal/:userId/experience/:experienceId', async ( req, res ) => {
       { $set: req.body }, 
       { 'new': true }
     ).catch( err => console.log( err ));
-    console.log( updatedExperience );
+    // console.log( req.body );
     res.status( 201 ).send( updatedExperience );
   });
 
