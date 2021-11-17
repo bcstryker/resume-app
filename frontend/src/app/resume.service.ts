@@ -12,6 +12,10 @@ export class ResumeService {
 
   constructor( private apiConfigService: ApiConfigService ) { }
 
+  getOneResume( userId: string, resumeId: string ): Observable<ResumeModel> {
+    return this.apiConfigService.getOneResume( `portal/${userId}/resumes/${resumeId}` )
+  }
+  
   // get all resumes from a user
   getAllResumes( userId: string ): Observable<ResumeModel[]> {
     return this.apiConfigService.getResumes( `portal/${userId}/resumes` );

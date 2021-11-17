@@ -1,0 +1,36 @@
+<div class="container text-center mt-4">
+    <div class="col-9 border">
+        <h4 class='fw-bold p-2'>Edit Work Experience</h4>
+        <div class="list-group p-2">
+            <div *ngFor="let experience of resumeExperience">
+                <input #title type="text" class="form-control" id="title" value={{experience.title}}>
+                <input #employer type="text" class="form-control" id="employer" value={{experience.employer}}>
+                <input #startDate type="date" class="form-control" id="startDate" value={{experience.startDate.toString().substring(0,10)}}>
+                <input #endDate type="date" class="form-control" id="endDate" value={{experience.endDate.toString().substring(0,10)}}>
+                <textarea #description type="text" class="form-control" rows=2 cols=80>{{experience.currentDescription}}</textarea>
+                <br/>
+                <button type="submit" class="btn btn-primary mx-1 mt-2 mb-4"  
+                    (click)="editResumeExperience(
+                        experience._id,
+                        {
+                            'employer': employer.value,
+                            'startDate': startDate.value,
+                            'endDate': endDate.value,
+                            'title': title.value
+                        }, 
+                        description.value)">
+                    Submit Changes
+                </button>
+            </div>
+            <div class="row">
+                <div class="col8">
+                    <div>
+                        <button type="button" class="btn btn-danger mx-1 mt-2" routerLink="../">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>

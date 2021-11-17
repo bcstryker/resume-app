@@ -8,6 +8,7 @@ import { NewResumeScreenComponent } from './screens/new-resume-screen/new-resume
 import { NewExperienceScreenComponent } from './screens/new-experience-screen/new-experience-screen.component';
 import { NewUserScreenComponent } from './screens/new-user-screen/new-user-screen.component';
 import { EditExperienceScreenComponent } from './screens/edit-experience-screen/edit-experience-screen.component';
+import { EditResumeExperienceScreenComponent } from './screens/edit-resume-experience-screen/edit-resume-experience-screen.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditExperienceScreenComponent } from './screens/edit-experience-screen/
     NewResumeScreenComponent,
     NewExperienceScreenComponent,
     NewUserScreenComponent,
-    EditExperienceScreenComponent
+    EditExperienceScreenComponent,
+    EditResumeExperienceScreenComponent
   ],
   imports: [
     BrowserModule,
