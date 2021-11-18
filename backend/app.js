@@ -113,7 +113,7 @@ app.get( '/portal/:userId/experience', async ( req, res ) => {
 
 // GET one experience from a resume
 app.get( '/portal/:userId/experience/:experienceId', async ( req, res ) => {
-    const experienceResponse = await experience.find({
+    const experienceResponse = await experience.findOne({
       _userId: req.params.userId,
       _id: req.params.experienceId
     }).catch( err => console.log( error ) );
@@ -128,7 +128,6 @@ app.patch( '/portal/:userId/experience/:experienceId', async ( req, res ) => {
       { $set: req.body }, 
       { 'new': true }
     ).catch( err => console.log( err ));
-    console.log( updatedExperience );
     res.status( 201 ).send( updatedExperience );
   });
 

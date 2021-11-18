@@ -27,7 +27,6 @@ export class EditExperienceScreenComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       ( params: Params ) => {
         this.userId = params.userId;
-        this.experienceId = params.experienceId;
         this.resumeId = params.resumeId;
         if ( this.userId ) {
           this.experienceService.getExperience( this.userId ).subscribe(
